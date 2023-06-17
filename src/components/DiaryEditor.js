@@ -29,23 +29,23 @@ export default function DiaryEditor({ onCreate }) {
       });
       return;
     }
-
-    if (state.content.trim().length < 5) {
-      contentInput.current.focus();
-      setError({
-        code: 2,
-        message: "본문의 길이가 짧습니다.",
-      });
-      return;
-    }
     if (state.content.trim().length < 1) {
       contentInput.current.focus();
       setError({
-        code: 3,
+        code: 2,
         message: "본문 내용을 입력하세요",
       });
       return;
     }
+    if (state.content.trim().length < 5) {
+      contentInput.current.focus();
+      setError({
+        code: 3,
+        message: "본문의 길이가 짧습니다.",
+      });
+      return;
+    }
+
     alert("저장 완료");
     onCreate(state);
     setError({ code: 0, message: "" });
