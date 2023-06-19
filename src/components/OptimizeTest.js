@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const CounterA = React.memo(({ count }) => {
   console.log("카운트 A업뎃");

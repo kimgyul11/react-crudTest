@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import styles from "./DiaryItem.module.css";
+import { DiaryDispatchContext } from "../context/DiaryDispatch";
 
-export default function DiaryItem(props) {
-  const { id, author, content, emotion, create_date, onRemove, onEdit } = props;
+function DiaryItem({ id, author, content, emotion, create_date }) {
+  console.log(`${id}번째 아이템 렌더`);
+  const { onRemove, onEdit } = useContext(DiaryDispatchContext);
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => setIsEdit(!isEdit);
   const [localContent, setLocalContent] = useState(content);
@@ -34,7 +36,7 @@ export default function DiaryItem(props) {
     <div className={styles.diaryItem}>
       <div className={styles.diaryItem_header}>
         <span className={styles.info}>
-          작성자 : {author} | 감정점수 : {emotion}
+          작성자 : {author} | 리뷰 : {emotion}
         </span>
         <br />
         <span className={styles.date}>
@@ -68,3 +70,5 @@ export default function DiaryItem(props) {
     </div>
   );
 }
+
+export default React.memo(DiaryItem);

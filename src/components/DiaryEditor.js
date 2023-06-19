@@ -1,15 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "./DiaryEditor.module.css";
+import { DiaryDispatchContext } from "../context/DiaryDispatch";
 
-export default function DiaryEditor({ onCreate }) {
+function DiaryEditor() {
+  const { onCreate } = useContext(DiaryDispatchContext);
   const authorInput = useRef();
   const contentInput = useRef();
-  const foucs = () => {
-    authorInput.current.focus();
-  };
-  useEffect(() => {
-    foucs();
-  }, []);
+
   const [error, setError] = useState({
     code: 0,
     message: "",
@@ -89,7 +86,7 @@ export default function DiaryEditor({ onCreate }) {
           {error.code === 3 && <p>{error.message}</p>}
         </div>
         <div>
-          <span>오늘의 평가 점수</span>
+          <span>리뷰</span>
           <select
             name="emotion"
             value={state.emotion}
@@ -109,3 +106,4 @@ export default function DiaryEditor({ onCreate }) {
     </div>
   );
 }
+export default React.memo(DiaryEditor);
